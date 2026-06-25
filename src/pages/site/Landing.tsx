@@ -57,31 +57,41 @@ export default function Landing() {
               animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.7, 0.4] }}
               transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}
             />
-            {/* slow-rotating orbit ring */}
-            <motion.span
-              aria-hidden
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-28 w-28 md:h-36 md:w-36 rounded-full border-2 border-transparent border-t-moo-cyan/60 border-r-moo-violet/40"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
-            />
-            {/* floating logo disc */}
+            {/* floating logo + frame (move together so the ring stays exactly on the logo) */}
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="relative grid place-items-center h-24 w-24 md:h-28 md:w-28 rounded-full overflow-hidden bg-moo-bg2 ring-2 ring-white/15 glow-violet"
+              className="relative grid place-items-center h-24 w-24 md:h-28 md:w-28"
             >
-              {logo ? (
-                <img
-                  src={logo}
-                  alt={data.showroom.name}
-                  className="h-full w-full object-cover"
-                  draggable={false}
-                />
-              ) : (
-                <span className="font-display font-extrabold text-4xl gradient-text">
-                  {brandInitial}
-                </span>
-              )}
+              {/* frame ring 1 — hugs the logo edge exactly, spins clockwise */}
+              <motion.span
+                aria-hidden
+                className="absolute inset-0 rounded-full border-2 border-transparent border-t-moo-cyan border-r-moo-violet"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+              />
+              {/* frame ring 2 — counter-rotates for a richer orbit */}
+              <motion.span
+                aria-hidden
+                className="absolute inset-0 rounded-full border-2 border-transparent border-b-moo-rose/80 border-l-moo-cyan/50"
+                animate={{ rotate: -360 }}
+                transition={{ duration: 13, repeat: Infinity, ease: "linear" }}
+              />
+              {/* logo disc */}
+              <div className="relative grid place-items-center h-full w-full rounded-full overflow-hidden bg-moo-bg2 ring-2 ring-white/15 glow-violet">
+                {logo ? (
+                  <img
+                    src={logo}
+                    alt={data.showroom.name}
+                    className="h-full w-full object-cover"
+                    draggable={false}
+                  />
+                ) : (
+                  <span className="font-display font-extrabold text-4xl gradient-text">
+                    {brandInitial}
+                  </span>
+                )}
+              </div>
             </motion.div>
           </motion.div>
 

@@ -89,6 +89,7 @@ export function AdminLayout() {
               >
                 <NavLink
                   to={item.to}
+                  onClick={() => setCollapsed(true)}
                   className={cn(
                     "relative flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-colors group",
                     active ? "text-white" : "text-moo-muted hover:text-moo-ink"
