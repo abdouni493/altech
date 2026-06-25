@@ -1,0 +1,258 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 24% 4%;
+    --foreground: 210 40% 98%;
+    --card: 240 22% 8%;
+    --card-foreground: 210 40% 98%;
+    --primary: 258 90% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 20% 14%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 240 16% 16%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 189 94% 43%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 350 89% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 18% 20%;
+    --input: 240 18% 18%;
+    --ring: 258 90% 66%;
+    --radius: 1rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-moo-bg text-moo-ink font-sans antialiased;
+    background-color: #0a0a0f;
+    overflow-x: hidden;
+  }
+
+  /* RTL font swap */
+  html[dir="rtl"] body {
+    @apply font-arabic;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0a0f;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #7c3aed, #06b6d4);
+    border-radius: 8px;
+  }
+  ::selection {
+    background: rgba(124, 58, 237, 0.4);
+    color: #fff;
+  }
+}
+
+@layer components {
+  /* ----- Glassmorphism surface ----- */
+  .glass {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0.02)
+    );
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-strong {
+    background: linear-gradient(
+      135deg,
+      rgba(18, 18, 28, 0.85),
+      rgba(10, 10, 15, 0.7)
+    );
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* ----- Animated gradient text ----- */
+  .gradient-text {
+    background: linear-gradient(
+      120deg,
+      #7c3aed,
+      #2563eb,
+      #06b6d4,
+      #ec4899,
+      #7c3aed
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 6s ease infinite;
+  }
+
+  .gradient-text-green {
+    background: linear-gradient(
+      120deg,
+      #34d399,
+      #10b981,
+      #22c55e,
+      #4ade80,
+      #34d399
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 6s ease infinite;
+    filter: drop-shadow(0 0 18px rgba(34, 197, 94, 0.35));
+  }
+
+  .gradient-text-blue {
+    background: linear-gradient(
+      120deg,
+      #22d3ee,
+      #3b82f6,
+      #6366f1,
+      #2563eb,
+      #22d3ee
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 6s ease infinite;
+    filter: drop-shadow(0 0 18px rgba(59, 130, 246, 0.35));
+  }
+
+  .gradient-text-secondary {
+    background: linear-gradient(120deg, #ec4899, #f97316, #ec4899);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 5s ease infinite;
+  }
+
+  /* ----- Animated gradient border (glowing, pulsing) ----- */
+  .gradient-border {
+    position: relative;
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, rgba(18, 18, 28, 0.85), rgba(10, 10, 15, 0.7));
+  }
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      120deg,
+      #7c3aed,
+      #2563eb,
+      #06b6d4,
+      #ec4899
+    );
+    background-size: 300% 300%;
+    animation: gradient-shift 8s ease infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  /* ----- Animated gradient button background ----- */
+  .btn-gradient {
+    background: linear-gradient(120deg, #7c3aed, #2563eb, #06b6d4);
+    background-size: 200% 200%;
+    animation: gradient-shift 5s ease infinite;
+    transition: transform 0.2s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  }
+  .btn-gradient:hover {
+    filter: brightness(1.12);
+    box-shadow: 0 8px 30px -6px rgba(124, 58, 237, 0.6);
+  }
+  .btn-gradient-secondary {
+    background: linear-gradient(120deg, #ec4899, #f97316);
+    background-size: 200% 200%;
+    animation: gradient-shift 5s ease infinite;
+  }
+
+  /* ----- Glow utilities ----- */
+  .glow-violet {
+    box-shadow: 0 0 40px -10px rgba(124, 58, 237, 0.55);
+  }
+  .glow-cyan {
+    box-shadow: 0 0 40px -10px rgba(6, 182, 212, 0.5);
+  }
+
+  /* ----- Aurora animated background blobs ----- */
+  .aurora-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .aurora-blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    opacity: 0.5;
+    will-change: transform;
+  }
+
+  /* ----- Animated mesh gradient page background ----- */
+  .mesh-bg {
+    background-color: #0a0a0f;
+    background-image: radial-gradient(
+        at 15% 20%,
+        rgba(124, 58, 237, 0.22) 0px,
+        transparent 50%
+      ),
+      radial-gradient(at 85% 15%, rgba(6, 182, 212, 0.18) 0px, transparent 50%),
+      radial-gradient(at 75% 85%, rgba(236, 72, 153, 0.16) 0px, transparent 50%),
+      radial-gradient(at 10% 90%, rgba(37, 99, 235, 0.18) 0px, transparent 50%);
+    background-size: 200% 200%;
+    animation: gradient-shift 16s ease infinite;
+  }
+
+  .card-hover {
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow 0.3s ease;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

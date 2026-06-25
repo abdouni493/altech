@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Local env (anon key lives here; use .env.example as template)
+.env.local
+.env*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor/OS
+.DS_Store
+Thumbs.db
+
+# TS build info
+*.tsbuildinfo
