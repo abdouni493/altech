@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 
 import { useStore } from "@/store/StoreContext";
-import { Logo, LogoMark } from "@/components/ui/Logo";
+import { Logo } from "@/components/ui/Logo";
 import { LanguageToggle } from "@/components/ui/LanguageToggle";
 import { PageTransition } from "@/components/PageTransition";
 import { Aurora } from "@/components/ui/Aurora";
@@ -62,17 +62,16 @@ export function AdminLayout() {
 
       {/* Sidebar */}
       <motion.aside
-        animate={{ width: collapsed ? 84 : 264 }}
+        animate={{ width: collapsed ? 0 : 264 }}
         transition={{ type: "spring", stiffness: 260, damping: 28 }}
-        className="relative z-30 shrink-0 h-dvh sticky top-0 glass-strong border-e border-white/10 flex flex-col"
+        className={cn(
+          "relative z-30 shrink-0 h-dvh sticky top-0 glass-strong flex flex-col overflow-hidden",
+          collapsed ? "border-e-0" : "border-e border-white/10"
+        )}
       >
         {/* Logo */}
         <div className="h-20 flex items-center px-5 border-b border-white/10 overflow-hidden">
-          {collapsed ? (
-            <LogoMark size="md" />
-          ) : (
-            <Logo size="sm" />
-          )}
+          <Logo size="sm" />
         </div>
 
         {/* Nav */}
