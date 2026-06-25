@@ -20,6 +20,18 @@ npm run build    # type-check + production build
 npm run preview  # preview the production build
 ```
 
+## Deploy to Vercel
+This repo is Vercel-ready (`vercel.json` sets the Vite framework preset, `dist` output, and SPA rewrites so deep links like `/site/programs` don't 404).
+
+1. Push to GitHub (already done), then in Vercel: **Add New → Project → Import** this repo.
+2. Vercel auto-detects the settings from `vercel.json` — no manual config needed.
+3. Add the environment variables under **Project → Settings → Environment Variables** (copy from `.env.example`):
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+4. **Deploy.** Future pushes to `main` auto-deploy.
+
+> `.env.local` is git-ignored, so set the Supabase values directly in Vercel.
+
 ## Login
 - **Demo Account** button → instant full-access admin (no typing).
 - Or credentials: `admin@moosing.dz` / `moosing2026`.
